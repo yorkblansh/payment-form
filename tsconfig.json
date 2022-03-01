@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "types": [ "node"],
+    // "jsx": "react",
+  
+    "jsx": "react-jsx",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "target": "esnext",
+    "moduleResolution": "node",
+    "baseUrl": ".src",
+    "sourceMap": true,
+    "outDir": "dist",
+ 
+    "allowSyntheticDefaultImports": true,
+    "allowJs": true,
+    /* Experimental Options */
+    "experimentalDecorators": true /* Enables experimental support for ES7 decorators. */,
+    "emitDecoratorMetadata": true /* Enables experimental support for emitting type metadata for decorators. */
+  },
+  "lib": ["es2021"],
+ 
+  "exclude": ["views/", "dist/", "react_frontend/",]
+}
+// {
+//   "compilerOptions": {
+//     "jsx": "react",
+//     "esModuleInterop": true
+//   }
+// }

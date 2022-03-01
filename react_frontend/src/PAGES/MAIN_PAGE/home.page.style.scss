@@ -1,0 +1,39 @@
+.home-page {
+    top: 60px;
+    display: flex;
+    flex-direction: column;
+    background-color: aqua;
+    align-content: center;
+
+    &--wrapper {
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+        margin: 15px;
+
+        &--element {
+            background-color: blueviolet;
+            margin: 15px;
+            border-radius: 6px;
+            margin: 5px;
+            padding: 5px;
+            width: auto;
+
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+
+
+            &--data {
+                display: flex;
+                flex-direction: column;
+            }
+
+            &--buttons {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+            }
+        }
+    }
+}
