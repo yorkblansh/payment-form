@@ -9,7 +9,10 @@ type prop = {
 	m?: number
 	margin?: string
 	width?: string
-	regexp?: (value: string) => string
+	res?: (value: string) => {
+		value: string | boolean
+		isCorrect: boolean
+	}
 }
 
 export enum II {
