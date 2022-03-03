@@ -14,8 +14,7 @@ export const INPUT_PROPS_MAP: I_INPUTS_PROPS_MAP = {
 export const CustomInput = (props: { Icon: JSX.Element; label: string; TYPE: keyof typeof INPUT_PROPS_MAP }) => {
 	const { Icon, label, TYPE } = props
 	const _sx = INPUT_PROPS_MAP[TYPE]
-	const [previosValue, set] = useState('')
-	// let prev_value: string
+	const [previosValue, setPreviosValue] = useState('')
 	let { value, checkValue, isCorrect } = useValidate()
 	console.dir(isCorrect)
 	return (
@@ -29,10 +28,8 @@ export const CustomInput = (props: { Icon: JSX.Element; label: string; TYPE: key
 			}}
 			value={isCorrect ? previosValue : value}
 			onChange={({ target: { value } }) => {
-				if (!isCorrect) set(value)
-				// isCorrect = false
-
-				checkValue({ val: value, TYPE })
+				checkValue({ value, TYPE })
+				!isCorrect && setPreviosValue(value)
 			}}
 			sx={_sx}
 			id="filled-basic"
