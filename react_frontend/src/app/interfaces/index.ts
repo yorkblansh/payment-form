@@ -1,3 +1,10 @@
+export type T_vStatus = keyof typeof E_inputStatus
+export enum E_inputStatus {
+	empty = 0,
+	typing = 1,
+	correct = 2,
+}
+
 export interface I_INPUTS_PROPS_MAP {
 	amount: T_default_prop
 	card: T_default_prop
@@ -13,8 +20,8 @@ type T_default_prop = {
 	margin?: string
 	width?: string
 	res?: (value: string) => {
-		value: string 
-		isCorrect: boolean
+		value: string
+		vStatus: T_vStatus
 	}
 }
 

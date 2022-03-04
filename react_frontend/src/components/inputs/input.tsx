@@ -1,13 +1,34 @@
 import TextField from '@mui/material/TextField'
 import InputAdornment from '@mui/material/InputAdornment'
 import { useValidate } from 'app/hooks/useValidate'
-import { I_INPUTS_PROPS_MAP } from 'app/interfaces'
+import { I_INPUTS_PROPS_MAP, T_vStatus } from 'app/interfaces'
 import { useState } from 'react'
-const COLORS_MAP = (isCorrect: boolean): I_INPUTS_PROPS_MAP => ({
-	amount: { _color: isCorrect ? 'success' : 'info' },
-	card: { _color: isCorrect ? 'success' : 'info' },
-	expdate: { _color: isCorrect ? 'info' : 'error' },
-	cvv: { _color: isCorrect ? 'success' : 'error' },
+
+const V_STATUS_MAP = {}
+
+const COLORS_MAP = (vStatus: T_vStatus): I_INPUTS_PROPS_MAP => ({
+	amount: { _color: vStatus === 'empty' ? 'primary' : 'success' },
+	card: {
+		_color:
+			vStatus === 'empty'
+				? 'primary'
+				: vStatus === 'typing'
+				? 'info'
+				: vStatus === 'correct'
+				? 'success'
+				: 'primary',
+	},
+	expdate: { _color: vStatus ? 'info' : 'error' },
+	cvv: {
+		_color:
+			vStatus === 'empty'
+				? 'primary'
+				: vStatus === 'typing'
+				? 'info'
+				: vStatus === 'correct'
+				? 'success'
+				: 'primary',
+	},
 })
 export const INPUT_PROPS_MAP: I_INPUTS_PROPS_MAP = {
 	amount: { m: 1, margin: '10px', width: '210px' },
@@ -20,14 +41,14 @@ export const CustomInput = (props: { Icon: JSX.Element; label: string; TYPE: key
 	const { Icon, label, TYPE } = props
 	const _sx = INPUT_PROPS_MAP[TYPE]
 	const [previosValue, setPreviosValue] = useState('')
-	let { value, checkValue, isCorrect } = useValidate()
-	console.dir(isCorrect)
-	const _value = isCorrect ? previosValue : value
+	let { value, checkValue, vStatus } = useValidate()
+	console.dir(`${TYPE} : ${vStatus}`)
+	const _value = vStatus ? previosValue : value
 	const _onChange = (value: string) => {
-		!isCorrect && setPreviosValue(value)
+		vStatus !== 'correct' && setPreviosValue(value)
 		checkValue({ value, TYPE })
 	}
-	const { _color } = COLORS_MAP(isCorrect)[TYPE]
+	const { _color } = COLORS_MAP(vStatus)[TYPE]
 
 	return (
 		<TextField
