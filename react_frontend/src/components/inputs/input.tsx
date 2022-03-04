@@ -27,7 +27,6 @@ export const CustomInput = (props: { Icon: JSX.Element; label: string; TYPE: key
 		!isCorrect && setPreviosValue(value)
 		checkValue({ value, TYPE })
 	}
-
 	const { _color } = COLORS_MAP(isCorrect)[TYPE]
 
 	return (
@@ -39,7 +38,7 @@ export const CustomInput = (props: { Icon: JSX.Element; label: string; TYPE: key
 					</InputAdornment>
 				),
 			}}
-			// label="Error"
+			focused
 			color={_color}
 			value={_value}
 			onChange={({ target: { value } }) => _onChange(value)}
