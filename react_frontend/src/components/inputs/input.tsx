@@ -1,9 +1,9 @@
 import TextField from '@mui/material/TextField'
 import InputAdornment from '@mui/material/InputAdornment'
 import { useValidate } from 'app/hooks/useValidate'
-import { I_INPUTS_PROPS_MAP } from 'app/interfaces'
+import { I_INPUTS_PROPS_MAP, T_vStatus } from 'app/interfaces'
 import { useState } from 'react'
-const COLORS_MAP = (isCorrect: boolean): I_INPUTS_PROPS_MAP => ({
+const COLORS_MAP = (isCorrect: T_vStatus | boolean): I_INPUTS_PROPS_MAP => ({
 	amount: { _color: isCorrect ? 'success' : 'info' },
 	card: { _color: isCorrect ? 'success' : 'info' },
 	expdate: { _color: isCorrect ? 'info' : 'error' },
@@ -24,7 +24,7 @@ export const CustomInput = (props: { Icon: JSX.Element; label: string; TYPE: key
 	console.dir(isCorrect)
 	const _value = isCorrect ? previosValue : value
 	const _onChange = (value: string) => {
-		!isCorrect && setPreviosValue(value)
+		isCorrect !== 'correct' && setPreviosValue(value)
 		checkValue({ value, TYPE })
 	}
 	const { _color } = COLORS_MAP(isCorrect)[TYPE]

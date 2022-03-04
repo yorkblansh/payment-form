@@ -11,10 +11,19 @@ export const re = (str: string) => (re: RegExp) => re.test(str)
 export const minus1 = (str: string) => str.substr(0, str.length - 1)
 
 const INPUTS_CHECK_REGEXP_MAP: I_INPUTS_PROPS_MAP = {
-	card: { res: v => ({ value: re(v)(/\b\d{1,16}\b/) ? v : minus1(v), isCorrect: re(v)(/\b\d{16}/) }) },
-	amount: { res: v => ({ value: re(v)(/\d+\b/) ? v : minus1(v), isCorrect: re(v)(/\d{1,}\b/) }) },
-	expdate: { res: v => ({ value: expdate_Validate(v), isCorrect: expdate_Check(v) }) },
-	cvv: { res: v => ({ value: re(v)(/\b\d{1,3}\b/) ? v : minus1(v), isCorrect: re(v)(/\b\d{3}/) }) },
+	card: {
+		res: v => ({
+			value: re(v)(/\b\d{1,16}\b/) ? v : minus1(v),
+			isCorrect: re(v)(/\b\d{16}/) ? 'correct' : false,
+		}),
+	},
+	amount: {
+		res: v => ({ value: re(v)(/\d+\b/) ? v : minus1(v), isCorrect: re(v)(/\d{1,}\b/) ? 'correct' : false }),
+	},
+	expdate: { res: v => ({ value: expdate_Validate(v), isCorrect: expdate_Check(v) ? 'correct' : false }) },
+	cvv: {
+		res: v => ({ value: re(v)(/\b\d{1,3}\b/) ? v : minus1(v), isCorrect: re(v)(/\b\d{3}/) ? 'correct' : false }),
+	},
 }
 
 export const useValidate = () => {
