@@ -12,7 +12,23 @@ export interface I_INPUTS_PROPS_MAP {
 	cvv: T_default_prop
 }
 
-export type Tcolor = 'error' | 'primary' | 'secondary' | 'info' | 'success' | 'warning'
+type color_status = { color: Tcolor; status: T_vStatus }
+
+export interface I_V_STATUS_MAP {
+	empty: color_status
+	typing: color_status
+	correct: color_status
+}
+
+enum E_color {
+	'error',
+	'primary',
+	'secondary',
+	'info',
+	'success',
+	'warning',
+}
+export type Tcolor = keyof typeof E_color
 
 type T_default_prop = {
 	_color?: Tcolor

@@ -1,10 +1,14 @@
 import TextField from '@mui/material/TextField'
 import InputAdornment from '@mui/material/InputAdornment'
 import { useValidate } from 'app/hooks/useValidate'
-import { I_INPUTS_PROPS_MAP, T_vStatus } from 'app/interfaces'
+import { I_INPUTS_PROPS_MAP, I_V_STATUS_MAP, Tcolor, T_vStatus } from 'app/interfaces'
 import { useState } from 'react'
 
-const V_STATUS_MAP = {}
+const V_STATUS_MAP: I_V_STATUS_MAP = {
+	empty: { color: 'primary', status: 'empty' },
+	typing: { color: 'info', status: 'typing' },
+	correct: { color: 'success', status: 'correct' },
+}
 
 const COLORS_MAP = (vStatus: T_vStatus): I_INPUTS_PROPS_MAP => ({
 	amount: { _color: vStatus === 'empty' ? 'primary' : 'success' },
@@ -42,13 +46,14 @@ export const CustomInput = (props: { Icon: JSX.Element; label: string; TYPE: key
 	const _sx = INPUT_PROPS_MAP[TYPE]
 	const [previosValue, setPreviosValue] = useState('')
 	let { value, checkValue, vStatus } = useValidate()
+	const { color, status } = V_STATUS_MAP[vStatus]
 	console.dir(`${TYPE} : ${vStatus}`)
-	const _value = vStatus ? previosValue : value
+	const _value = status === 'correct' ? previosValue : value
 	const _onChange = (value: string) => {
 		vStatus !== 'correct' && setPreviosValue(value)
 		checkValue({ value, TYPE })
 	}
-	const { _color } = COLORS_MAP(vStatus)[TYPE]
+	// const { _color } = COLORS_MAP(vStatus)[TYPE]
 
 	return (
 		<TextField
@@ -60,7 +65,7 @@ export const CustomInput = (props: { Icon: JSX.Element; label: string; TYPE: key
 				),
 			}}
 			focused
-			color={_color}
+			color={color}
 			value={_value}
 			onChange={({ target: { value } }) => _onChange(value)}
 			sx={_sx}
