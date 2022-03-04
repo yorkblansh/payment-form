@@ -7,15 +7,14 @@
 // import './home.page.style.scss';
 // import { useItemList } from 'app/hooks/useItemList';
 // import { SortButtons } from 'config/SortButtons';
-import { PaperBackground } from 'components/card/card';
-import { PaymentForm } from 'components/forms/payment.form';
-import { SubmitButton } from 'components/buttons/btns';
-import { Header } from 'components/header/header';
+import { PaperBackground } from 'components/card/card'
+import { PaymentForm } from 'components/forms/payment.form'
+import { SubmitButton } from 'components/buttons/btns'
+import { Header } from 'components/header/header'
 
 export const MAIN_PAGE = () => (
 	<PaperBackground>
 		<Header label="Форма Оплаты" />
-
 		<PaymentForm SubmitButton={<SubmitButton label="Оплатить" btn_variant="contained" />} />
 	</PaperBackground>
-);
+)

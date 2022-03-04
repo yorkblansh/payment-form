@@ -1,10 +1,10 @@
-import AppBar from '@mui/material/AppBar';
-import Stack from '@mui/material/Stack';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import AppBar from '@mui/material/AppBar'
+import Stack from '@mui/material/Stack'
+import Toolbar from '@mui/material/Toolbar'
+import Typography from '@mui/material/Typography'
+import IconButton from '@mui/material/IconButton'
+import MenuIcon from '@mui/icons-material/Menu'
+import { ThemeProvider, createTheme } from '@mui/material/styles'
 
 function appBarLabel(label: string) {
 	return (
@@ -16,7 +16,7 @@ function appBarLabel(label: string) {
 				{label}
 			</Typography>
 		</Toolbar>
-	);
+	)
 }
 
 const darkTheme = createTheme({
@@ -26,7 +26,7 @@ const darkTheme = createTheme({
 			main: '#1976d2',
 		},
 	},
-});
+})
 
 export const Header = (props: { label: string }) => (
 	<Stack spacing={2} sx={{ flexGrow: 1 }}>
@@ -36,4 +36,4 @@ export const Header = (props: { label: string }) => (
 			</AppBar>
 		</ThemeProvider>
 	</Stack>
-);
+)

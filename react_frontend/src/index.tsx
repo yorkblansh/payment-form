@@ -7,7 +7,7 @@ import { PATH } from 'api/consts';
 const App = () => (
 	<BrowserRouter>
 		<Routes>
-			<Route path={PATH('/')} element={<MAIN_PAGE />} />
+			<Route   path={PATH('/')} element={<MAIN_PAGE />} />
 		</Routes>
 	</BrowserRouter>
 );

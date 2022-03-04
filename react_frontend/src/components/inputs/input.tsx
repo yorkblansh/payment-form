@@ -3,7 +3,12 @@ import InputAdornment from '@mui/material/InputAdornment'
 import { useValidate } from 'app/hooks/useValidate'
 import { I_INPUTS_PROPS_MAP } from 'app/interfaces'
 import { useState } from 'react'
-
+const COLORS_MAP = (isCorrect: boolean): I_INPUTS_PROPS_MAP => ({
+	amount: { _color: isCorrect ? 'success' : 'info' },
+	card: { _color: isCorrect ? 'success' : 'info' },
+	expdate: { _color: isCorrect ? 'info' : 'error' },
+	cvv: { _color: isCorrect ? 'success' : 'error' },
+})
 export const INPUT_PROPS_MAP: I_INPUTS_PROPS_MAP = {
 	amount: { m: 1, margin: '10px', width: '210px' },
 	card: { m: 1, margin: '10px', width: '200px' },
@@ -17,6 +22,14 @@ export const CustomInput = (props: { Icon: JSX.Element; label: string; TYPE: key
 	const [previosValue, setPreviosValue] = useState('')
 	let { value, checkValue, isCorrect } = useValidate()
 	console.dir(isCorrect)
+	const _value = isCorrect ? previosValue : value
+	const _onChange = (value: string) => {
+		!isCorrect && setPreviosValue(value)
+		checkValue({ value, TYPE })
+	}
+
+	const { _color } = COLORS_MAP(isCorrect)[TYPE]
+
 	return (
 		<TextField
 			InputProps={{
@@ -26,11 +39,10 @@ export const CustomInput = (props: { Icon: JSX.Element; label: string; TYPE: key
 					</InputAdornment>
 				),
 			}}
-			value={isCorrect ? previosValue : value}
-			onChange={({ target: { value } }) => {
-				checkValue({ value, TYPE })
-				!isCorrect && setPreviosValue(value)
-			}}
+			// label="Error"
+			color={_color}
+			value={_value}
+			onChange={({ target: { value } }) => _onChange(value)}
 			sx={_sx}
 			id="filled-basic"
 			label={label}

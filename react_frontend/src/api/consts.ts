@@ -45,8 +45,8 @@ export enum PERF_TYPE {
 	'REMOVE_FROM_FAVORITE',
 }
 
-export type Iuser_types = 'admin' | 'default';
+export type Iuser_types = 'admin' | 'default'
 
-export const COOKIES = (cookie: keyof typeof COOKIE_ENUM) => cookie;
-export const REST_API = (path: keyof typeof API) => path;
-export const PATH = (path: keyof typeof MAIN_PATHES) => path;
+export const COOKIES = (cookie: keyof typeof COOKIE_ENUM) => cookie
+export const REST_API = (path: keyof typeof API) => path
+export const PATH = (path: keyof typeof MAIN_PATHES) => path
