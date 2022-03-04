@@ -37,7 +37,7 @@ type T_default_prop = {
 	width?: string
 	res?: (value: string) => {
 		value: string
-		vStatus: T_vStatus
+		VSTATUS: T_vStatus
 	}
 }
 
