@@ -12,7 +12,7 @@ const V_STATUS_MAP: I_V_STATUS_MAP = {
 	correct: { color: 'success', status: 'correct' },
 	error: { color: 'error', status: 'error' },
 }
-const _types = ['amount', 'card', 'expdate', 'cvv']
+const all_input_types = ['amount', 'card', 'expdate', 'cvv']
 
 export const INPUT_PROPS_MAP: I_INPUTS_PROPS_MAP = {
 	amount: { m: 1, margin: '10px', width: '210px' },
@@ -28,7 +28,6 @@ export const CustomInput = (props: {
 	TYPE: keyof typeof INPUT_PROPS_MAP
 	cbb: (isValid: boolean) => void
 }) => {
-	console.dir(vMap)
 	const { Icon, label, TYPE, Length, cbb } = props
 	const sx = INPUT_PROPS_MAP[TYPE]
 	const [isFocused, setFocus] = useState(false)
@@ -44,10 +43,12 @@ export const CustomInput = (props: {
 		checkValue({ value, TYPE })
 		SET_ERROR(false)
 	}
-	const Label = `${label}${isFocused ? (Length ? `(${Length})` : '') : ''}`
+	const Label = `${TYPE === 'expdate' && isFocused ? `mm/yyyy ${label}` : label}${
+		isFocused ? (Length ? `(${Length})` : '') : ''
+	}`
 	VSTATUS === 'correct' ? vMap.set(TYPE, { isValid: true }) : vMap.set(TYPE, { isValid: false })
 	if (VSTATUS !== 'empty' && vMap.size > 0)
-		_types.map(v => vMap.get(v)).filter(v => v?.isValid).length === 3 ? cbb(false) : cbb(true)
+		all_input_types.map(v => vMap.get(v)).filter(v => v?.isValid).length === 4 ? cbb(false) : cbb(true)
 
 	return (
 		<TextField
@@ -58,8 +59,16 @@ export const CustomInput = (props: {
 					</InputAdornment>
 				),
 			}}
-			onMouseLeave={e =>
-				VSTATUS !== 'correct' ? (TYPE === 'amount' ? SET_ERROR(false) : SET_ERROR(true)) : setFocus(true)
+			onMouseLeave={
+				e =>
+					VSTATUS === 'empty'
+						? setFocus(false)
+						: VSTATUS === 'typing'
+						? TYPE === 'amount'
+							? SET_ERROR(false)
+							: SET_ERROR(true)
+						: setFocus(true)
+				// VSTATUS !== 'correct' ? (TYPE === 'amount' ? SET_ERROR(false) : SET_ERROR(true)) : setFocus(true)
 			}
 			onMouseEnter={e => setFocus(true)}
 			onPointerEnter={e => setFocus(true)}

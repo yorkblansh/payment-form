@@ -2,7 +2,7 @@
 import { INPUT_PROPS_MAP } from 'components/inputs/input'
 import { useState } from 'react'
 import { I_INPUTS_PROPS_MAP, T_vStatus } from 'app/interfaces'
-import { expdate_correct, expdate_typing, expdate_Validate } from 'app/expdate.validate'
+import { expdate_correct, expdate_Validate } from 'app/expdate.validate'
 
 type hook_data = { value: string; TYPE: keyof typeof INPUT_PROPS_MAP }
 type TcheckValue = (obj: hook_data) => void
@@ -26,7 +26,7 @@ const INPUTS_CHECK_REGEXP_MAP: I_INPUTS_PROPS_MAP = {
 	expdate: {
 		res: v => ({
 			value: expdate_Validate(v),
-			VSTATUS: expdate_typing(v) ? 'typing' : expdate_correct(v) ? 'correct' : 'error',
+			VSTATUS: expdate_correct(v) ? 'correct' : 'error',
 		}),
 	},
 	cvv: {
