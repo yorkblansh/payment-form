@@ -8,16 +8,9 @@ import { SubmitButton } from 'components/buttons/btns'
 import { div_style, sx1, sx2 } from './style.objects'
 import { useState } from 'react'
 
-// [
-// 	{ TYPE: 'card', isValid: false },
-// 	{ TYPE: 'expdate', isValid: false },
-// 	{ TYPE: 'cvv', isValid: false },
-// 	{ TYPE: 'amount', isValid: false },
-// ]
-
 export const vMap = new Map<string, { isValid: boolean }>()
 export const PaymentForm = () => {
-	const [disabled, Vcheck] = useState(false)
+	const [disabled, Vcheck] = useState(true)
 	const cbb = (v: boolean) => Vcheck(v)
 	return (
 		<>

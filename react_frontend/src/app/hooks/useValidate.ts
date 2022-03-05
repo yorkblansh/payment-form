@@ -13,12 +13,15 @@ export const minus1 = (str: string) => str.substr(0, str.length - 1)
 const INPUTS_CHECK_REGEXP_MAP: I_INPUTS_PROPS_MAP = {
 	card: {
 		res: v => ({
-			value: re(v)(/\b\d{1,16}\b/) ? v : minus1(v),
+			value: re(v)(/\b\d{1,16}\b/) ? v.replace(/\D/g, '') : v.replace(/\D/g, ''),
 			VSTATUS: re(v)(/\b\d{16}/) ? 'correct' : re(v)(/\b\d{1,16}/) ? 'typing' : 'empty',
 		}),
 	},
 	amount: {
-		res: v => ({ value: re(v)(/\d+\b/) ? v : minus1(v), VSTATUS: re(v)(/\d{1,}\b/) ? 'typing' : 'empty' }),
+		res: v => ({
+			value: re(v)(/\d/) ? v.replace(/\D/g, '') : v.replace(/\D/g, ''),
+			VSTATUS: re(v)(/\d\b/) ? 'correct' : 'correct',
+		}),
 	},
 	expdate: {
 		res: v => ({
@@ -28,7 +31,7 @@ const INPUTS_CHECK_REGEXP_MAP: I_INPUTS_PROPS_MAP = {
 	},
 	cvv: {
 		res: v => ({
-			value: re(v)(/\b\d{1,3}\b/) ? v : minus1(v),
+			value: re(v)(/\b\d{1,3}\b/) ? v.replace(/\D/g, '') : v.replace(/\D/g, ''),
 			VSTATUS: re(v)(/\b\d{3}/) ? 'correct' : re(v)(/\b\d{1,3}/) ? 'typing' : 'empty',
 		}),
 	},

@@ -29,15 +29,13 @@ export const CustomInput = (props: {
 	cbb: (isValid: boolean) => void
 }) => {
 	console.dir(vMap)
-
 	const { Icon, label, TYPE, Length, cbb } = props
 	const sx = INPUT_PROPS_MAP[TYPE]
 	const [isFocused, setFocus] = useState(false)
 	const [previosValue, setPreviosValue] = useState('')
 	const { value, checkValue, VSTATUS, SET_ERROR } = useValidate()
 	const { color: Color } = V_STATUS_MAP[VSTATUS]
-	console.dir(`${TYPE} : ${VSTATUS}`)
-	const Value = VSTATUS === 'correct' ? previosValue : value
+	const Value = VSTATUS === 'correct' ? (TYPE === 'amount' ? value : previosValue) : value
 	const OnChange = (value: string) => {
 		TYPE === 'amount' &&
 			(value.length !== 0 ? vMap.set(TYPE, { isValid: true }) : vMap.set(TYPE, { isValid: false }))
@@ -47,15 +45,9 @@ export const CustomInput = (props: {
 		SET_ERROR(false)
 	}
 	const Label = `${label}${isFocused ? (Length ? `(${Length})` : '') : ''}`
-
-	if (VSTATUS === 'correct') {
-		vMap.set(TYPE, { isValid: true })
-		console.dir(vMap)
-	}
-
-	if (VSTATUS !== 'empty') {
-		console.dir(_types.map(v => vMap.get(v)).filter(v => v?.isValid).length === 3 ? cbb(false) : cbb(true))
-	}
+	VSTATUS === 'correct' ? vMap.set(TYPE, { isValid: true }) : vMap.set(TYPE, { isValid: false })
+	if (VSTATUS !== 'empty' && vMap.size > 0)
+		_types.map(v => vMap.get(v)).filter(v => v?.isValid).length === 3 ? cbb(false) : cbb(true)
 
 	return (
 		<TextField

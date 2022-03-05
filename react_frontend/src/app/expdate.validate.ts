@@ -1,16 +1,16 @@
 import { minus1, re } from 'app/hooks/useValidate'
 
 export const expdate_Validate = (v: string) => {
-	let y
-	if (re(v)(/^\d{1,2}$/))
-		if (re(v)(/^\d{2}$/)) y = `${v}/`
-		else y = v
-	else if (re(v)(/^\d{2}[/]\d{1,2}$/))
-		if (re(v)(/^\d{2}[/][1][012]$/)) y = `${v}/`
-		else y = minus1(v)
-	else if (re(v)(/^\d{2}[/]\d{2}[/]\d{2}$/)) y = v
-	// else if (re(v)(/^(\d{2}[/]\d{2}[/]\b\d{2})*$/)) y =v
-	else y =v.substr(0,7)
+	let y=v
+	// if (re(v)(/^\d{1,2}$/))
+	// 	if (re(v)(/^\d{2}$/)) y = `${v}/`
+	// 	else y = v
+	// else if (re(v)(/^\d{2}[/]\d{1,2}$/))
+	// 	if (re(v)(/^\d{2}[/]\d{2}$/)) y = `${v}/`
+	// 	else y = v
+	// else if (re(v)(/^\d{2}[/]\d{2}[/]\d{2}$/)) y = v
+	// // else if (re(v)(/^(\d{2}[/]\d{2}[/]\b\d{2})*$/)) y =v
+	// else y =v.substr(0,7)
 	return y
 }
 
