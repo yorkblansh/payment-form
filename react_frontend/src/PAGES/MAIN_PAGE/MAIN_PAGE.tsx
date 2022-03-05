@@ -15,6 +15,6 @@ import { Header } from 'components/header/header'
 export const MAIN_PAGE = () => (
 	<PaperBackground>
 		<Header label="Форма Оплаты" />
-		<PaymentForm SubmitButton={<SubmitButton label="Оплатить" btn_variant="contained" />} />
+		<PaymentForm />
 	</PaperBackground>
 )

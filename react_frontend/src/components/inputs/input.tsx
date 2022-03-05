@@ -3,6 +3,8 @@ import InputAdornment from '@mui/material/InputAdornment'
 import { useValidate } from 'app/hooks/useValidate'
 import { I_INPUTS_PROPS_MAP, I_V_STATUS_MAP } from 'app/interfaces'
 import { useState } from 'react'
+import { vMap } from 'components/forms/payment.form'
+import _ from 'lodash-es'
 
 const V_STATUS_MAP: I_V_STATUS_MAP = {
 	empty: { color: 'primary', status: 'empty' },
@@ -10,6 +12,7 @@ const V_STATUS_MAP: I_V_STATUS_MAP = {
 	correct: { color: 'success', status: 'correct' },
 	error: { color: 'error', status: 'error' },
 }
+const _types = ['amount', 'card', 'expdate', 'cvv']
 
 export const INPUT_PROPS_MAP: I_INPUTS_PROPS_MAP = {
 	amount: { m: 1, margin: '10px', width: '210px' },
@@ -23,8 +26,11 @@ export const CustomInput = (props: {
 	Icon: JSX.Element
 	label: string
 	TYPE: keyof typeof INPUT_PROPS_MAP
+	cbb: (isValid: boolean) => void
 }) => {
-	const { Icon, label, TYPE, Length } = props
+	console.dir(vMap)
+
+	const { Icon, label, TYPE, Length, cbb } = props
 	const sx = INPUT_PROPS_MAP[TYPE]
 	const [isFocused, setFocus] = useState(false)
 	const [previosValue, setPreviosValue] = useState('')
@@ -32,11 +38,23 @@ export const CustomInput = (props: {
 	const { color: Color } = V_STATUS_MAP[VSTATUS]
 	console.dir(`${TYPE} : ${VSTATUS}`)
 	const Value = VSTATUS === 'correct' ? previosValue : value
-	const _onChange = (value: string) => {
+	const OnChange = (value: string) => {
+		TYPE === 'amount' &&
+			(value.length !== 0 ? vMap.set(TYPE, { isValid: true }) : vMap.set(TYPE, { isValid: false }))
 		setFocus(true)
 		VSTATUS !== 'correct' && setPreviosValue(value)
 		checkValue({ value, TYPE })
 		SET_ERROR(false)
+	}
+	const Label = `${label}${isFocused ? (Length ? `(${Length})` : '') : ''}`
+
+	if (VSTATUS === 'correct') {
+		vMap.set(TYPE, { isValid: true })
+		console.dir(vMap)
+	}
+
+	if (VSTATUS !== 'empty') {
+		console.dir(_types.map(v => vMap.get(v)).filter(v => v?.isValid).length === 3 ? cbb(false) : cbb(true))
 	}
 
 	return (
@@ -56,10 +74,10 @@ export const CustomInput = (props: {
 			focused={isFocused}
 			color={Color}
 			value={Value}
-			onChange={({ target: { value } }) => _onChange(value)}
+			onChange={({ target: { value } }) => OnChange(value)}
 			sx={sx}
 			id="filled-basic"
-			label={`${label}${isFocused ? (Length ? `(${Length})` : '') : ''}`}
+			label={Label}
 			variant="filled"
 		/>
 	)
