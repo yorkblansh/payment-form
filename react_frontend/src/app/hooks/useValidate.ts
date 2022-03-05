@@ -2,7 +2,7 @@
 import { INPUT_PROPS_MAP } from 'components/inputs/input'
 import { useState } from 'react'
 import { I_INPUTS_PROPS_MAP, T_vStatus } from 'app/interfaces'
-import { expdate_Check, expdate_Validate } from 'app/expdate.validate'
+import { expdate_correct, expdate_typing, expdate_Validate } from 'app/expdate.validate'
 
 type hook_data = { value: string; TYPE: keyof typeof INPUT_PROPS_MAP }
 type TcheckValue = (obj: hook_data) => void
@@ -18,9 +18,14 @@ const INPUTS_CHECK_REGEXP_MAP: I_INPUTS_PROPS_MAP = {
 		}),
 	},
 	amount: {
-		res: v => ({ value: re(v)(/\d+\b/) ? v : minus1(v), VSTATUS: re(v)(/\d{1,}\b/) ? 'correct' : 'empty' }),
+		res: v => ({ value: re(v)(/\d+\b/) ? v : minus1(v), VSTATUS: re(v)(/\d{1,}\b/) ? 'typing' : 'empty' }),
 	},
-	expdate: { res: v => ({ value: expdate_Validate(v), VSTATUS: expdate_Check(v) ? 'correct' : 'empty' }) },
+	expdate: {
+		res: v => ({
+			value: expdate_Validate(v),
+			VSTATUS: expdate_typing(v) ? 'typing' : expdate_correct(v) ? 'correct' : 'error',
+		}),
+	},
 	cvv: {
 		res: v => ({
 			value: re(v)(/\b\d{1,3}\b/) ? v : minus1(v),
@@ -30,6 +35,7 @@ const INPUTS_CHECK_REGEXP_MAP: I_INPUTS_PROPS_MAP = {
 }
 
 export const useValidate = () => {
+	const [error, SET_ERROR] = useState(false)
 	const HOOK: any = useState<hook_data>({ value: '', TYPE: 'card' })
 	const [_checked_value, checkValue]: [hook_data, TcheckValue] = HOOK
 	const { TYPE, value: val } = _checked_value
@@ -38,5 +44,10 @@ export const useValidate = () => {
 	const { VSTATUS, value }: { value: string; VSTATUS: T_vStatus } = isAllGood
 		? res(val)
 		: { value: '', VSTATUS: 'empty' }
-	return { value, checkValue, VSTATUS }
+	return {
+		value,
+		checkValue,
+		VSTATUS: error ? 'error' : VSTATUS,
+		SET_ERROR,
+	}
 }

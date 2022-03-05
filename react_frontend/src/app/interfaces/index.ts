@@ -3,6 +3,7 @@ export enum E_inputStatus {
 	empty = 0,
 	typing = 1,
 	correct = 2,
+	error = 3,
 }
 
 export interface I_INPUTS_PROPS_MAP {
@@ -18,6 +19,7 @@ export interface I_V_STATUS_MAP {
 	empty: color_status
 	typing: color_status
 	correct: color_status
+	error: color_status
 }
 
 enum E_color {

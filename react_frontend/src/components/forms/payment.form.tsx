@@ -47,13 +47,12 @@ export const PaymentForm = ({ SubmitButton }: { SubmitButton: JSX.Element }) => 
 					margin: '18px',
 					flexDirection: 'row',
 				}}>
-				<CustomInput Icon={<CreditCardIcon />} label="Card Number" TYPE="card" />
+				<CustomInput Length="16" Icon={<CreditCardIcon />} label="Card Number" TYPE="card" />
 				<CustomInput Icon={<EventIcon />} label="Expiration Date" TYPE="expdate" />
 
 				<CustomInput Icon={<CreditCardSharpIcon />} label="CVV" TYPE="cvv" />
 			</BoxWrap>
 			<BoxWrap
-			
 				sx={{
 					display: 'flex',
 					flexWrap: 'wrap',
