@@ -1,1 +1,1 @@
-export { PaymentData } from '../../react_frontend/src/app/interfaces'
+export { IPaymentData } from '../../react_frontend/src/app/interfaces'

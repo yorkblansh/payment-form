@@ -4,8 +4,9 @@
    "description": "",
    "main": "dist/src/index.js",
    "scripts": {
-      "start": "./node_modules/.bin/eslint src/ && tsc && node dist/src/index.js",
-      "build": "./node_modules/.bin/eslint src/ && tsc",
+      "ln": "./scripts/symlink.sh ",
+      "start": "./node_modules/.bin/eslint src/ && tsc && node dist/src/index.js && ./scripts/symlink.sh",
+      "build": "./node_modules/.bin/eslint src/ && tsc && ./scripts/symlink.sh ",
       "test": "echo \"Error: no test specified\" && exit 1"
    },
    "keywords": [],
@@ -20,6 +21,7 @@
       "@types/date-and-time": "^0.13.0",
       "@typescript-eslint/eslint-plugin": "^5.13.0",
       "@typescript-eslint/parser": "^5.13.0",
+      "axios": "^0.26.0",
       "date-and-time": "^2.2.1",
       "express": "^4.17.3",
       "node-json-db": "^1.4.1"

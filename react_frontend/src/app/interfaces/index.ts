@@ -6,11 +6,12 @@ export enum E_inputStatus {
 	error = 3,
 }
 
-export interface PaymentData {
+export interface IPaymentData {
 	amount: number
 	card: number
 	expdate: string
 	cvv: number
+	date: Date
 }
 
 export interface I_INPUTS_PROPS_MAP {

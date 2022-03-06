@@ -21,14 +21,24 @@ export const INPUT_PROPS_MAP: I_INPUTS_PROPS_MAP = {
 	cvv: { m: 1, margin: '10px', width: '90px' },
 }
 
-export const CustomInput = (props: {
+interface IProps {
 	Length?: string
 	Icon: JSX.Element
 	label: string
 	TYPE: keyof typeof INPUT_PROPS_MAP
-	cbb: (isValid: boolean) => void
+	cbv: (isValid: boolean) => void
+}
+
+export type CusIn = (props: IProps) => JSX.Element
+
+export const CustomInput: CusIn = (props: {
+	Length?: string
+	Icon: JSX.Element
+	label: string
+	TYPE: keyof typeof INPUT_PROPS_MAP
+	cbv: (isValid: boolean) => void
 }) => {
-	const { Icon, label, TYPE, Length, cbb } = props
+	const { Icon, label, TYPE, Length, cbv: cbb } = props
 	const sx = INPUT_PROPS_MAP[TYPE]
 	const [isFocused, setFocus] = useState(false)
 	const [previosValue, setPreviosValue] = useState('')
