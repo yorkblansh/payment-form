@@ -1,9 +1,17 @@
 import TextField from '@mui/material/TextField'
 import InputAdornment from '@mui/material/InputAdornment'
 import { useValidate } from 'app/hooks/useValidate'
-import { I_INPUTS_PROPS_MAP, I_V_STATUS_MAP, TCusInput } from 'app/interfaces'
+import { I_INPUTS_PROPS_MAP, I_V_STATUS_MAP } from 'app/interfaces'
 import { useState } from 'react'
 import { vMap } from 'components/forms/payment.form'
+export type TCusInput = (props: IProps) => JSX.Element
+interface IProps {
+	Length?: string
+	Icon: JSX.Element
+	label: string
+	TYPE: keyof typeof INPUT_PROPS_MAP
+	cbv: (isValid: boolean) => void
+}
 
 const V_STATUS_MAP: I_V_STATUS_MAP = {
 	empty: { color: 'primary', status: 'empty' },

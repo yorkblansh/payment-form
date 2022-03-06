@@ -1,5 +1,3 @@
-import { INPUT_PROPS_MAP } from 'components/inputs/input'
-
 export type T_vStatus = keyof typeof E_inputStatus
 export enum E_inputStatus {
 	empty = 0,
@@ -60,13 +58,3 @@ export enum II {
 	'expdate',
 	'cvv',
 }
-
-interface IProps {
-	Length?: string
-	Icon: JSX.Element
-	label: string
-	TYPE: keyof typeof INPUT_PROPS_MAP
-	cbv: (isValid: boolean) => void
-}
-
-export type TCusInput = (props: IProps) => JSX.Element
