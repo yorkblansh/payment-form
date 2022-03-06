@@ -1,43 +1,21 @@
 {
-  "compileOnSave": true,
-  "compilerOptions": {
-    "rootDir": ".",
-    "sourceMap": true,
-    "declaration": false,
-    "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "importHelpers": true,
-    "target": "es2015",
-    "module": "esnext",
-    "typeRoots": ["node_modules/@types"],
-    "lib": ["es2021", "dom"],
-    "skipLibCheck": true,
-    "skipDefaultLibCheck": true,
-    "baseUrl": "./src/",
-    "paths": {
-      // "<>*": [
-      //   "components*"
-      // ],
-      "consts": [
-        "../../src/app/api/"
-      ],
-      // "scripts": [
-      //   "scripts/index"
-      // ],
-      // "ROUTES": [
-      //   "ROUTES/index"
-      // ]
-    },
-    // "paths": {
-    //   "Modal_approvePage": [
-    //     "components/Modal_approvePage"
-    //   ],
-    //   "<>/":[
-    //     "components/"
-    //   ]
-    // },
-    "resolveJsonModule": true
-  },
-  "exclude": ["node_modules", "tmp"]
+	"compileOnSave": true,
+	"compilerOptions": {
+		"rootDir": ".",
+		"sourceMap": true,
+		"declaration": false,
+		"moduleResolution": "node",
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"importHelpers": true,
+		"target": "es2015",
+		"module": "esnext",
+		"typeRoots": ["node_modules/@types"],
+		"lib": ["es2021", "dom"],
+		"skipLibCheck": true,
+		"skipDefaultLibCheck": true,
+		"baseUrl": "./src/",
+		"resolveJsonModule": true
+	},
+	"exclude": ["node_modules", "tmp"]
 }
