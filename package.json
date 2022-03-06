@@ -19,11 +19,13 @@
    },
    "dependencies": {
       "@types/date-and-time": "^0.13.0",
+      "@types/md5": "^2.3.2",
       "@typescript-eslint/eslint-plugin": "^5.13.0",
       "@typescript-eslint/parser": "^5.13.0",
       "axios": "^0.26.0",
       "date-and-time": "^2.2.1",
       "express": "^4.17.3",
+      "md5": "^2.3.0",
       "node-json-db": "^1.4.1"
    }
 }

@@ -50,5 +50,11 @@ const OnSubmit = (e: onSubmitEvent_Obj) => {
 			date: el('date'),
 			expdate: el('expdate'),
 		})
-		.then(res => console.dir(res.data))
+		.then(res => {
+			const {
+				your_payment_data: { id, amount },
+			} = res.data
+			console.table(res.data)
+			alert(`id:${id}, amount:${amount}`)
+		})
 }

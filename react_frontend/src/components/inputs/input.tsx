@@ -1,10 +1,9 @@
 import TextField from '@mui/material/TextField'
 import InputAdornment from '@mui/material/InputAdornment'
 import { useValidate } from 'app/hooks/useValidate'
-import { I_INPUTS_PROPS_MAP, I_V_STATUS_MAP } from 'app/interfaces'
+import { I_INPUTS_PROPS_MAP, I_V_STATUS_MAP, TCusInput } from 'app/interfaces'
 import { useState } from 'react'
 import { vMap } from 'components/forms/payment.form'
-import _ from 'lodash-es'
 
 const V_STATUS_MAP: I_V_STATUS_MAP = {
 	empty: { color: 'primary', status: 'empty' },
@@ -21,23 +20,7 @@ export const INPUT_PROPS_MAP: I_INPUTS_PROPS_MAP = {
 	cvv: { m: 1, margin: '10px', width: '90px' },
 }
 
-interface IProps {
-	Length?: string
-	Icon: JSX.Element
-	label: string
-	TYPE: keyof typeof INPUT_PROPS_MAP
-	cbv: (isValid: boolean) => void
-}
-
-export type CusIn = (props: IProps) => JSX.Element
-
-export const CustomInput: CusIn = (props: {
-	Length?: string
-	Icon: JSX.Element
-	label: string
-	TYPE: keyof typeof INPUT_PROPS_MAP
-	cbv: (isValid: boolean) => void
-}) => {
+export const CustomInput: TCusInput = props => {
 	const { Icon, label, TYPE, Length, cbv: cbb } = props
 	const sx = INPUT_PROPS_MAP[TYPE]
 	const [isFocused, setFocus] = useState(false)

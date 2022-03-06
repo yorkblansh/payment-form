@@ -8,7 +8,6 @@ type hook_data = { value: string; TYPE: keyof typeof INPUT_PROPS_MAP }
 type TcheckValue = (obj: hook_data) => void
 
 export const re = (str: string) => (re: RegExp) => re.test(str)
-export const minus1 = (str: string) => str.substr(0, str.length - 1)
 
 const INPUTS_CHECK_REGEXP_MAP: I_INPUTS_PROPS_MAP = {
 	card: {
