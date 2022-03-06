@@ -6,6 +6,13 @@ export enum E_inputStatus {
 	error = 3,
 }
 
+export interface PaymentData {
+	amount: number
+	card: number
+	expdate: string
+	cvv: number
+}
+
 export interface I_INPUTS_PROPS_MAP {
 	amount: T_default_prop
 	card: T_default_prop

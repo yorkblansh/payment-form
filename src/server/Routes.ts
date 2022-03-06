@@ -8,4 +8,4 @@ export const WebRoute = (_express: Application) => {
    _express.get('*', (req, res) => res.sendFile(path.resolve(__dirname, 'build', 'index.html')))
 }
 
-export const sendStatic = (res: IResponse) => res.sendFile(__dirname + '/build/index.html')
+export const sendStaticOn = (res: IResponse) => res.sendFile(__dirname + '/build/index.html')

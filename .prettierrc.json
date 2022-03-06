@@ -6,6 +6,5 @@
   "singleQuote": true,
   "bracketSpacing": true,
   "bracketSameLine": true,
-  "arrowParens": "always",
-  "parser": "typescript"
+  "arrowParens": "always"
 }
