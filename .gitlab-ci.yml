@@ -12,6 +12,7 @@ pages:
     - mv .public public
   artifacts:
     paths:
-      - react_frontend/build
+      - public
+      - react_frontend
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
