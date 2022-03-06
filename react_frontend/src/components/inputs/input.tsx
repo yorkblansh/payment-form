@@ -47,11 +47,22 @@ export const CustomInput = (props: {
 		isFocused ? (Length ? `(${Length})` : '') : ''
 	}`
 	VSTATUS === 'correct' ? vMap.set(TYPE, { isValid: true }) : vMap.set(TYPE, { isValid: false })
-	if (VSTATUS !== 'empty' && vMap.size > 0)
+	if (VSTATUS === 'typing' || VSTATUS === 'correct')
 		all_input_types.map(v => vMap.get(v)).filter(v => v?.isValid).length === 4 ? cbb(false) : cbb(true)
+
+	const onMouseLeave = () =>
+		VSTATUS === 'empty'
+			? setFocus(false)
+			: VSTATUS === 'typing'
+			? TYPE === 'amount'
+				? SET_ERROR(false)
+				: SET_ERROR(true)
+			: setFocus(true)
 
 	return (
 		<TextField
+			id={TYPE}
+			name={TYPE}
 			InputProps={{
 				endAdornment: (
 					<InputAdornment sx={{ width: '500', height: '500' }} position="end">
@@ -59,17 +70,7 @@ export const CustomInput = (props: {
 					</InputAdornment>
 				),
 			}}
-			onMouseLeave={
-				e =>
-					VSTATUS === 'empty'
-						? setFocus(false)
-						: VSTATUS === 'typing'
-						? TYPE === 'amount'
-							? SET_ERROR(false)
-							: SET_ERROR(true)
-						: setFocus(true)
-				// VSTATUS !== 'correct' ? (TYPE === 'amount' ? SET_ERROR(false) : SET_ERROR(true)) : setFocus(true)
-			}
+			onMouseLeave={e => onMouseLeave()}
 			onMouseEnter={e => setFocus(true)}
 			onPointerEnter={e => setFocus(true)}
 			focused={isFocused}
@@ -77,7 +78,6 @@ export const CustomInput = (props: {
 			value={Value}
 			onChange={({ target: { value } }) => OnChange(value)}
 			sx={sx}
-			id="filled-basic"
 			label={Label}
 			variant="filled"
 		/>

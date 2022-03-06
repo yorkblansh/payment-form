@@ -9,7 +9,6 @@
 // import { SortButtons } from 'config/SortButtons';
 import { PaperBackground } from 'components/card/card'
 import { PaymentForm } from 'components/forms/payment.form'
-import { SubmitButton } from 'components/buttons/btns'
 import { Header } from 'components/header/header'
 
 export const MAIN_PAGE = () => (
